@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#define CRC_32_LENGTH
+#define CRC_32_LENGTH 33
 
 void CamadaEnlaceDadosTransmissora(bool *quadro, int tam_quadro);
 void CamadaEnlaceDadosTransmissoraControleDeErro(bool *quadro, int tam_quadro);

@@ -7,7 +7,7 @@ void AplicacaoTransmissora() {
 
     //aloca espaço para mensagem
     char* mensagem;
-    mensagem = malloc(sizeof(char)*MSG_SIZE);
+    mensagem = (char *) malloc(sizeof(char)*MSG_SIZE);
 
     //lê a mesnagem digitada pelo usuário
     printf("Digite uma mensagem:\n");
@@ -24,7 +24,7 @@ void CamadaDeAplicacaoTransmissora(char *mensagem) {
 
     //alocando espaço para a variável onde savalremos os bits da mensagem
     bool *quadro;
-    quadro = malloc(sizeof(bool)*strlen(mensagem)*8); //essa alocação ta certa?
+    quadro = (bool *) malloc(sizeof(bool)*strlen(mensagem)*8); //essa alocação ta certa?
 
     char aux_char;
 
