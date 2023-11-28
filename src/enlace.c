@@ -95,4 +95,7 @@ void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, i
 
 void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro) {
 
+    // x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1
+    // 0000 0100 1100 0001 0001 1101 1011 0111
+
 }
