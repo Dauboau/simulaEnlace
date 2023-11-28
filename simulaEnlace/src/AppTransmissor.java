@@ -38,8 +38,8 @@ public class AppTransmissor {
         // debug quadro
         System.out.println(quadro);
 
-        String text = new String(new BigInteger(String.join("",quadro.toString().replaceAll(", |\\[|\\]", "")), 2).toByteArray());
-        System.out.println(text);
+        AppReceptor.camadaDeAplicacaoReceptora(quadro);
+        
     }
     
 }
