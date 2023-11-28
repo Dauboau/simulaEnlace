@@ -3,6 +3,6 @@
 
 #include <stdbool.h>
 
-void MeioDeComunicacao(bool *fluxoBrutoDeBits);
+void MeioDeComunicacao(bool *fluxoBrutoDeBits, int tam_quadro);
 
 #endif
