@@ -15,7 +15,7 @@ public class AppTransmissor {
         String mensagem = scannerInput.nextLine();
 
         // debug input
-        System.out.println(mensagem);
+        //System.out.println(mensagem);
 
         scannerInput.close();
 
