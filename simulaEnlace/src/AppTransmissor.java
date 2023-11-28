@@ -41,8 +41,5 @@ public class AppTransmissor {
         String text = new String(new BigInteger(String.join("",quadro.toString().replaceAll(", |\\[|\\]", "")), 2).toByteArray());
         System.out.println(text);
     }
-
-    // volta para o texto original
-    // String text = new String(new BigInteger(String.join("",quadro.toString().replaceAll(", |\\[|\\]", "")), 2).toByteArray());
     
 }
