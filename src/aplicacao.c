@@ -24,24 +24,25 @@ void CamadaDeAplicacaoTransmissora(char *mensagem) {
 
     //alocando espaço para a variável onde savalremos os bits da mensagem
     bool *quadro;
-    quadro = (bool *) malloc(sizeof(bool)*strlen(mensagem)*8); //essa alocação ta certa?
+    quadro = (bool *) malloc(sizeof(bool)*(strlen(mensagem)-1)*8); //essa alocação ta certa?
 
     char aux_char;
+    char *mensagem_aux_ptr = mensagem;
 
     //convertendo a mensagem em um array de bits (zeros e uns)
-    for (size_t i = 0; i < strlen(mensagem); i++) {
+    for (size_t i = 0; i < strlen(mensagem)-1; i++) {
         
-        aux_char = *mensagem;
+        aux_char = *mensagem_aux_ptr;
         
         //converte um caractere
-        for (int j = 7; j >= 0; --j) 
-            quadro[i*8 + j] = ((aux_char >> j) & 1);
+        for (int j = 0; j < 8; j++) 
+            quadro[i*8 + j] = ((aux_char >> (7-j)) & 1);
 
-        mensagem++;
+        mensagem_aux_ptr++;
 
     }
 
-    CamadaEnlaceDadosTransmissora(quadro, strlen(mensagem)*8);
+    CamadaEnlaceDadosTransmissora(quadro, (strlen(mensagem)-1)*8);
 
     free(quadro);
 
