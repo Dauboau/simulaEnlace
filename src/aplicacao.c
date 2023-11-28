@@ -1,7 +1,6 @@
 #include "../headers/aplicacao.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 void AplicacaoTransmissora() {
@@ -25,7 +24,7 @@ void CamadaDeAplicacaoTransmissora(char *mensagem) {
 
     //alocando espaço para a variável onde savalremos os bits da mensagem
     bool *quadro;
-    quadro = malloc(sizeof(bool)*MSG_SIZE*8); //essa alocação ta certa?
+    quadro = malloc(sizeof(bool)*strlen(mensagem)*8); //essa alocação ta certa?
 
     char aux_char;
 
@@ -41,6 +40,8 @@ void CamadaDeAplicacaoTransmissora(char *mensagem) {
         mensagem++;
 
     }
+
+    CamadaEnlaceDadosTransmissora(quadro, strlen(mensagem)*8);
 
     free(quadro);
 

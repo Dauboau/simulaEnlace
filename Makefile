@@ -3,8 +3,8 @@ all: exec
 run: exec
 	./exec
 
-exec: src/main.c src/aplicacao.c 
-	gcc -Wall -g src/main.c src/aplicacao.c -o exec
+exec: src/main.c src/aplicacao.c src/enlace.c 
+	gcc -Wall -g src/main.c src/aplicacao.c src/enlace.c -o exec
 
 clean: 
 	rm exec 
