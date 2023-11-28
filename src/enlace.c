@@ -95,7 +95,12 @@ void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, i
 
 void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro) {
 
-    // x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1
-    // 0000 0100 1100 0001 0001 1101 1011 0111
+    // x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1
+    // 1000 0100 1100 0001 0001 1101 1011 0111
+    const bool polinomio[CRC_32_LENGTH] = { 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 
+                                      0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1 };
+
+    bool *quadro_crc;
+    quadro_crc = malloc(sizeof(bool)*(tam_quadro + 31));        
 
 }

@@ -1,4 +1,5 @@
 #include "../headers/meioComunicacao.h"
+#include <stdio.h>
 
 void MeioDeComunicacao(bool *fluxoBrutoDeBits){
 
