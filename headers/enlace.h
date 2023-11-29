@@ -7,16 +7,17 @@
 
 void CamadaEnlaceDadosTransmissora(bool *quadro, int tam_quadro);
 void CamadaEnlaceDadosTransmissoraControleDeErro(bool *quadro, int tam_quadro);
-void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro);
-void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro);
-void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro);
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro, int tipo_controle);
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro, int tipo_controle);
+void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro, int tipo_controle);
 
-void CamadaEnlaceDadosReceptora(bool *quadro, int tam_quadro);
-void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro);
-//void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro);
-//void CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro);
+void CamadaEnlaceDadosReceptora(bool *quadro, int tam_quadro, int tipo_controle);
+void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro, int tipo_controle);
+void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro);
+void CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro);
 void CamadaEnlaceDadosReceptoraControleDeErroCRC(bool *quadro, int tam_quadro);
 
-void MeioDeComunicacao(bool *fluxoBrutoDeBits, int tam_quadro);
+void MeioDeComunicacao(bool *fluxoBrutoDeBits, int tam_quadro, int tipo_controle);
+void CamadaDeAplicacaoReceptora(bool *quadro, int tam_quadro);
 
 #endif

@@ -10,11 +10,11 @@ void CamadaEnlaceDadosTransmissora(bool *quadro, int tam_quadro) {
 
 }
 
-void CamadaEnlaceDadosReceptora(bool *quadro, int tam_quadro) {
+void CamadaEnlaceDadosReceptora(bool *quadro, int tam_quadro, int tipo_controle) {
 
     printf("Iniciando camada de enlace receptora...\n");
 
-    CamadaEnlaceDadosReceptoraControleDeErro(quadro, tam_quadro);
+    CamadaEnlaceDadosReceptoraControleDeErro(quadro, tam_quadro, tipo_controle);
 
 }
 
@@ -22,45 +22,43 @@ void CamadaEnlaceDadosTransmissoraControleDeErro(bool *quadro, int tam_quadro) {
 
     printf("Iniciando controle de erros da camada de enlace transmissora...\n");
 
-    int tipoDeControleDeErro = 2; // Ecolhercom base no tipo de teste que se deseja realiazar
+    int tipo_controle = 2; // Ecolhercom base no tipo de teste que se deseja realiazar
 
-    switch (tipoDeControleDeErro) {
+    switch (tipo_controle) {
 
     case 0:
 
-        CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(quadro, tam_quadro);
+        CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(quadro, tam_quadro, tipo_controle);
         break;
 
     case 1:
 
-        CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(quadro, tam_quadro);
+        CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(quadro, tam_quadro, tipo_controle);
         break;
     
     case 2:
     
-        CamadaEnlaceDadosTransmissoraControleDeErroCRC(quadro, tam_quadro);
+        CamadaEnlaceDadosTransmissoraControleDeErroCRC(quadro, tam_quadro, tipo_controle);
         break;
     
     }
 
 }
 
-void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro) {
+void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro, int tipo_controle) {
 
-    printf("Iniciando controle de erros da camada de enlace transmissora...\n");
+    printf("Iniciando controle de erros da camada de enlace receptora...\n");
 
-    int tipoDeControleDeErro = 2; // Ecolhercom base no tipo de teste que se deseja realiazar
-
-    switch (tipoDeControleDeErro) {
+    switch (tipo_controle) {
 
     case 0:
 
-        //CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(quadro, tam_quadro);
+        CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(quadro, tam_quadro);
         break;
 
     case 1:
 
-        //CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(quadro, tam_quadro);
+        CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(quadro, tam_quadro);
         break;
     
     case 2:
@@ -72,7 +70,7 @@ void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro) {
 
 }
 
-void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro) {
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro, int tipo_controle) {
 
     //alocação de memória para armazenar o quadro codificado
     bool *quadro_cod;
@@ -96,11 +94,14 @@ void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int
     //adição do bit de paridade ao final do qaudro codificado
     quadro_cod[tam_quadro] = paridade;
 
+    //realiza o envio dos bits
+    MeioDeComunicacao(quadro_cod, tam_quadro+1, tipo_controle);
+
     free(quadro_cod);
 
 }
 
-void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro) {
+void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro, int tipo_controle) {
 
     //alocação de memória para armazenar o quadro codificado
     bool *quadro_cod;
@@ -124,11 +125,14 @@ void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, i
     //adição do bit de paridade ao final do qaudro codificado
     quadro_cod[tam_quadro] = paridade;
 
+    //realiza o envio dos bits
+    MeioDeComunicacao(quadro_cod, tam_quadro+1, tipo_controle);
+
     free(quadro_cod);
 
 }
 
-void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro) {
+void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro, int tipo_controle) {
 
     printf("Iniciando checagem CRC32\n");
 
@@ -187,12 +191,82 @@ void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro
     printf("\n");
 
     //realiza o envio dos bits
-    MeioDeComunicacao(quadro_crc, tam_quadro_crc);
+    MeioDeComunicacao(quadro_crc, tam_quadro_crc, tipo_controle);
 
     free(quadro_crc);
 
 }
 
+void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro) {
+
+    //alocação de memória para armazenar o quadro codificado
+    bool *quadro_decod;
+    quadro_decod = malloc(sizeof(bool)*(tam_quadro +1));
+
+    //variável para armazenar o bit de pariade
+    bool paridade = false;
+
+    //calculo de paridade e cópia do quadro para o quadro codificado
+    for (size_t i = 0; i < tam_quadro; i++) {
+
+        //verifica se o bit é 1 para alterar a paridade
+        if(quadro[i])
+            paridade = !paridade;
+
+        quadro_decod[i] = quadro[i]; 
+
+    }
+    
+    //verifica se o bit de paridade corresponde ao valor esperado
+    if(quadro_decod[tam_quadro-1] != paridade){
+
+        printf("A mensagem apresentou um erro! Fechando aplicacao...");
+        exit(EXIT_FAILURE);
+
+    }
+
+    //envia a mensagem para a camada de aplicação
+    CamadaDeAplicacaoReceptora(quadro_decod, tam_quadro-1);
+
+    free(quadro_decod);
+
+}
+
+void CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro) {
+
+    //alocação de memória para armazenar o quadro codificado
+    bool *quadro_decod;
+    quadro_decod = malloc(sizeof(bool)*(tam_quadro +1));
+
+    //variável para armazenar o bit de pariade
+    bool paridade = true;
+
+
+    //calculo de paridade e cópia do quadro para o quadro codificado
+    for (size_t i = 0; i < tam_quadro; i++) {
+
+        //verifica se o bit é 1 para alterar a paridade
+        if(quadro[i])
+            paridade = !paridade;
+
+        quadro_decod[i] = quadro[i]; 
+
+    }
+    
+    //verifica se o bit de paridade corresponde ao valor esperado
+    if(quadro_decod[tam_quadro-1] != paridade){
+
+        printf("A mensagem apresentou um erro! Fechando aplicacao...");
+        exit(EXIT_FAILURE);
+
+    }
+
+    //envia a mensagem para a camada de aplicação
+    CamadaDeAplicacaoReceptora(quadro_decod, tam_quadro-1);
+
+    free(quadro_decod);
+
+}
 
 void CamadaEnlaceDadosReceptoraControleDeErroCRC(bool *quadro, int tam_quadro) {
 
@@ -256,14 +330,16 @@ void CamadaEnlaceDadosReceptoraControleDeErroCRC(bool *quadro, int tam_quadro) {
 
     //imprime o quadro
     printf("QUADRO recebido: \n");
-    for(int i = 0; i<tam_quadro; i++){
-        if(quadro_crc[i])
+    for(int i = 0; i<tam_quadro_decod; i++){
+        if(quadro_decod[i])
             printf("1");
         else
             printf("0");
     }
+    printf("\n");
 
-    //chamar sla oq
+    //chama camada de aplicação
+    CamadaDeAplicacaoReceptora(quadro_decod, tam_quadro_decod);
 
     free(quadro_crc);
 
