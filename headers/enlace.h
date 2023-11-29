@@ -11,4 +11,12 @@ void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadePar(bool *quadro, int
 void CamadaEnlaceDadosTransmissoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro);
 void CamadaEnlaceDadosTransmissoraControleDeErroCRC(bool *quadro, int tam_quadro);
 
+void CamadaEnlaceDadosReceptora(bool *quadro, int tam_quadro);
+void CamadaEnlaceDadosReceptoraControleDeErro(bool *quadro, int tam_quadro);
+//void CamadaEnlaceDadosReceptoraControleDeErroBitParidadePar(bool *quadro, int tam_quadro);
+//void CamadaEnlaceDadosReceptoraControleDeErroBitParidadeImpar(bool *quadro, int tam_quadro);
+void CamadaEnlaceDadosReceptoraControleDeErroCRC(bool *quadro, int tam_quadro);
+
+void MeioDeComunicacao(bool *fluxoBrutoDeBits, int tam_quadro);
+
 #endif

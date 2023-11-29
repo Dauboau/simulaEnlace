@@ -7,6 +7,10 @@
 
 void AplicacaoTransmissora();
 void CamadaDeAplicacaoTransmissora(char *mensagem);
+
+void AplicacaoReceptora(char *mensagem);
+void CamadaDeAplicacaoReceptora(bool *quadro, int tam_quadro);
+
 void CamadaEnlaceDadosTransmissora(bool *quadro, int tam_quadro);
 
 #endif
