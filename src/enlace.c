@@ -409,5 +409,6 @@ void CamadaEnlaceDadosReceptoraControleDeErroCRC(bool *quadro, int tam_quadro) {
     CamadaDeAplicacaoReceptora(quadro_decod, tam_quadro_decod);
 
     free(quadro_crc);
+    free(quadro_decod);
 
 }
