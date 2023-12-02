@@ -11,10 +11,14 @@ Programa que simula o envio de um dado entre 2 computadores com o fim de simular
 
 Para compilar e executar o programa, utilizamos um arquivos Makefile.
 
-## O comando para compilar é:
+### O comando para compilar é:
 
 make all
 
-## O comando para executar é:
+### O comando para executar é:
 
 make run
+
+### Instruções para alterar o percentual de erro:
+
+A variável "erro" em meioComunicacao.c pode ser alterada para alterar o percentual de erro simulado pelo programa
