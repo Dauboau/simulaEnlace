@@ -21,4 +21,4 @@ make run
 
 ### Instruções para alterar o percentual de erro:
 
-A variável "erro" em meioComunicacao.c pode ser alterada para alterar o percentual de erro simulado pelo programa
+A variável "erro" em "meioComunicacao.c" pode ser alterada para alterar o percentual de erro simulado pelo programa
